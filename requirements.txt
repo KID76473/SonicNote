@@ -1,2 +1,6 @@
 SpeechRecognition
 pydub
+pyannote.audio
+python-dotenv
+torch
+torchaudio
