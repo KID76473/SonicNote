@@ -46,18 +46,44 @@ def perform_diarization(pipeline, audio_path):
     
     return segments
 
+def filter_short_segments(segments, min_duration=1.0):
+    """Filter out segments shorter than min_duration seconds."""
+    filtered_segments = []
+    for segment in segments:
+        duration = segment["end"] - segment["start"]
+        if duration >= min_duration:
+            filtered_segments.append(segment)
+        else:
+            print(f"Ignoring short segment: Speaker {segment['speaker']} ({segment['start']:.1f}s - {segment['end']:.1f}s)")
+    return filtered_segments
+
 def merge_segments(segments):
-    """Merge consecutive segments from the same speaker."""
+    """
+    Merge all consecutive segments from the same speaker.
+    
+    Args:
+        segments: List of segment dictionaries
+        
+    Returns:
+        List of merged segments
+    """
     if not segments:
         return []
     
+    # Sort segments by start time
+    segments = sorted(segments, key=lambda x: x["start"])
+    
     merged_segments = [segments[0].copy()]
     
-    for segment in segments[1:]:
-        if segment["speaker"] == merged_segments[-1]["speaker"]:
-            merged_segments[-1]["end"] = segment["end"]
+    for current_segment in segments[1:]:
+        last_segment = merged_segments[-1]
+        
+        if current_segment["speaker"] == last_segment["speaker"]:
+            # Always merge if same speaker
+            last_segment["end"] = max(last_segment["end"], current_segment["end"])
         else:
-            merged_segments.append(segment.copy())
+            # Different speaker - add as new segment
+            merged_segments.append(current_segment.copy())
     
     print(f"Merged {len(segments)} segments into {len(merged_segments)} speaker turns")
     return merged_segments
@@ -139,7 +165,8 @@ def diarize_and_transcribe(audio_path, output_file=None):
     # Process audio
     audio = load_audio_file(audio_path)
     segments = perform_diarization(pipeline, audio_path)
-    merged_segments = merge_segments(segments)
+    filtered_segments = filter_short_segments(segments)
+    merged_segments = merge_segments(filtered_segments)
     results = process_segments(audio, merged_segments, whisper_model)
     
     # Save results if needed
