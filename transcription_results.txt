@@ -1,15 +1,9 @@
 Speaker Diarization and Transcription Results
 ==================================================
 
-Speaker SPEAKER_01 (0.0s - 11.1s):
-hello this is James and I'm 23 years old and when I was a kid and I always I want to be a sinus in the future and when I was around
-
-Speaker SPEAKER_00 (9.6s - 9.6s):
-[Could not understand audio]
-
-Speaker SPEAKER_01 (11.7s - 16.8s):
-12413 out of their basketball player
+Speaker SPEAKER_01 (0.0s - 16.8s):
+ Hello, this is James and I'm 23 years old. And when I was a kid, I always thought I want to be a scientist in the future. And when I was around 12 or 13, I want to be a basketball player.
 
 Speaker SPEAKER_00 (17.5s - 28.7s):
-oh that's a lovely to hear James I'm glad to hear you're from Beijing I hear their beef there is very tasty I would like to try someone day thank you
+ Oh, that's lovely to hear James. I'm glad to hear you're from Beijing. I hear their beef there is very tasty. I would like to try some one day. Thank you.
 

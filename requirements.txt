@@ -1,6 +1,8 @@
-SpeechRecognition
+faster-whisper
+openai-whisper
 pydub
 pyannote.audio
 python-dotenv
+speechrecognition
 torch
 torchaudio
