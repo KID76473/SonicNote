@@ -191,7 +191,7 @@ def format_transcript(results):
 
 if __name__ == "__main__":
     audio_file = "recordings/conversation.wav"
-    output_file = "transcription_results.txt"
+    output_file = "conv1.txt"
     
     results = diarize_and_transcribe(audio_file, output_file)
     

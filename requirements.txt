@@ -6,3 +6,4 @@ python-dotenv
 speechrecognition
 torch
 torchaudio
+transformers
